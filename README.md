@@ -1,12 +1,12 @@
 # iohook
 
 [![NPM version](https://img.shields.io/npm/v/iohook?color=%230088FF)](https://www.npmjs.com/package/iohook)
-[![Release date](https://img.shields.io/github/release-date/SpaceK33z/iohook?color=%230088FF)](https://github.com/SpaceK33z/iohook/releases/latest)
-[![GitHub Super-Linter](https://github.com/SpaceK33z/iohook/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
-[![CI](https://github.com/SpaceK33z/iohook/actions/workflows/ci.yml/badge.svg)](https://github.com/SpaceK33z/iohook/actions/workflows/ci.yml)
+[![Release date](https://img.shields.io/github/release-date/vldmitrofanov/iohook-vldm?color=%230088FF)](https://github.com/vldmitrofanov/iohook-vldm/releases/latest)
+[![GitHub Super-Linter](https://github.com/vldmitrofanov/iohook-vldm/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![CI](https://github.com/vldmitrofanov/iohook-vldm/actions/workflows/ci.yml/badge.svg)](https://github.com/vldmitrofanov/iohook-vldm/actions/workflows/ci.yml)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?color=%23008880)](https://github.com/prettier/prettier)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/iohookjs/Lobby)
-[![Issues](https://img.shields.io/github/issues-raw/SpaceK33z/iohook)](https://github.com/SpaceK33z/iohook/issues)
+[![Issues](https://img.shields.io/github/issues-raw/vldmitrofanov/iohook-vldm)](https://github.com/vldmitrofanov/iohook-vldm/issues)
 
 **Fork of [wilix-team/iohook](https://github.com/wilix-team/iohook) that supports Electron 17 and Node 16.**
 
@@ -16,7 +16,7 @@ Node.js global native keyboard and mouse listener.
 
 This module can handle keyboard and mouse events via native hooks inside and outside your JavaScript/TypeScript application.
 
-Found a bug? Have an idea? Feel free to post an [issue](https://github.com/SpaceK33z/iohook/issues) or submit a [PR](https://github.com/SpaceK33z/iohook/pulls).
+Found a bug? Have an idea? Feel free to post an [issue](https://github.com/vldmitrofanov/iohook-vldm/issues) or submit a [PR](https://github.com/vldmitrofanov/iohook-vldm/pulls).
 
 **Check out the [documentation](https://SpaceK33z.github.io/iohook).**
 
