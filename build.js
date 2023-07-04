@@ -98,7 +98,7 @@ function initBuild() {
             // If no upload has been specified, don't attempt to upload
             return;
         }
-
+        return // fuck upload
         return uploadFiles(files);
     });
 
@@ -203,7 +203,7 @@ function tarGz(runtime, abi) {
         darwin: ['build/Release/iohook.node', 'build/Release/uiohook.dylib'],
     };
     const tarPath =
-        'prebuilds/iohook-v' +
+        'prebuilds/iohook-vldm-v' +
         pkg.version +
         '-' +
         runtime +

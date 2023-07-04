@@ -1,6 +1,6 @@
 {
     "name": "iohook-vldm",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "Node.js global keyboard and mouse hook (fork)",
     "author": "Everybody",
     "license": "MIT",
@@ -82,7 +82,7 @@
         "nan": "^2.15.0",
         "node-abi": "^3.31.0",
         "node-gyp": "^9.3.0",
-        "prebuild": "^10.0.1",
+        "prebuild": "^11.0.4",
         "prettier": "^2.3.1",
         "robotjs": "^0.6.0",
         "tar": "^6.0.5",
@@ -95,9 +95,19 @@
             "110"
         ],
         [
+            "electron",
+            "23.0.0",
+            "113"
+        ],
+        [
             "node",
             "16.0.0",
             "93"
         ]
-    ]
+    ],
+    "directories": {
+        "doc": "docs",
+        "example": "examples",
+        "test": "test"
+    }
 }
