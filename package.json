@@ -1,6 +1,6 @@
 {
     "name": "iohook-vldm",
-    "version": "1.1.1",
+    "version": "1.0.3",
     "description": "Node.js global keyboard and mouse hook (fork)",
     "author": "Everybody",
     "license": "MIT",
