@@ -6,3 +6,4 @@ Run on each platform (use node 18 to build) and upload obtained prebuilds to the
 ```bash
 node build.js --runtime electron --version 23.1.1 --abi 113
 ```
+as per documentation https://wilix-team.github.io/iohook/manual-build.html#building-for-specific-versions-of-node
