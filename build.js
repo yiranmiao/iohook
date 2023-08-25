@@ -14,6 +14,8 @@ let arch = process.env.ARCH ?
   process.env.ARCH.replace('i686', 'ia32').replace('x86_64', 'x64') :
   process.arch;
 
+console.log("\n\n============= arch:\n\n" + arch + "\n\n====================\n\n")
+
 let gypJsPath = path.join(
   __dirname,
   'node_modules',
@@ -147,8 +149,9 @@ function build(runtime, version, abi) {
       args.push('--dist-url=https://artifacts.electronjs.org/headers/dist');
     }
 
+    // console.log("\n\n============= arch:\n\n" + arch + "\n\n====================\n\n");
     if (parseInt(abi) >= 80) {
-      if (arch === 'x64') {
+      if (arch === 'x64' || arch === 'arm64') {
         args.push('--v8_enable_pointer_compression=1');
       } else {
         args.push('--v8_enable_pointer_compression=0');
