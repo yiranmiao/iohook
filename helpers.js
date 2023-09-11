@@ -9,7 +9,6 @@ function optionsFromPackage(attempts) {
   attempts = attempts || 2;
   if (attempts > 5) {
     console.log("Can't resolve main package.json file");
-    console.log("Looked in: " + path.join(__dirname, mainPath, 'package.json').toString())
     return {
       targets: [],
       platforms: [process.platform],
