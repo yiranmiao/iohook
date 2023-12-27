@@ -1,6 +1,6 @@
 {
   "name": "iohook",
-  "version": "1.0.12",
+  "version": "1.0.10",
   "description": "Node.js global keyboard and mouse hook (fork)",
   "author": "Everybody",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:deploy": "npm run docs:build && gh-pages -d docs/.vuepress/dist/",
-    "release": "npm version patch && git add . && git commit -am 'version bump' && git tag v$(node -p \"require('./package.json').version\") && git push --tags"
+    "release": "git add . && git commit -am 'version bump' && git tag v$(node -p \"require('./package.json').version\") && git push --tags"
   },
   "keywords": [
     "hook",
