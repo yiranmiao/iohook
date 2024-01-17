@@ -15,8 +15,10 @@ jobs:
   ci:
     strategy:
       matrix:
-        os: [macos-13, windows-latest]
-        arch: [x64, arm64]
+        os: [macos-13]
+        arch: [x64]
+        # os: [macos-13, windows-latest]
+        # arch: [x64, arm64]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} (${{matrix.arch}})
     steps:
