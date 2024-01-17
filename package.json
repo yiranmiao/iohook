@@ -4,13 +4,13 @@
   "description": "Node.js global keyboard and mouse hook (fork)",
   "author": "Everybody",
   "license": "MIT",
-  "homepage": "https://github.com/yuvalkarmi/iohook",
+  "homepage": "https://github.com/glitter-ai/iohook",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yuvalkarmi/iohook.git"
+    "url": "git+https://github.com/glitter-ai/iohook.git"
   },
   "bugs": {
-    "url": "https://github.com/yuvalkarmi/iohook/issues"
+    "url": "https://github.com/glitter-ai/iohook/issues"
   },
   "main": "index.js",
   "types": "index.d.ts",
