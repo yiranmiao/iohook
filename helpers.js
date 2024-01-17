@@ -6,11 +6,17 @@ const fs = require('fs');
  * @return {Object}
  */
 function optionsFromPackage(attempts) {
+  // this is a modified version of the original optionsFromPackage
+  // which read iohook's package.json rather than the main project
+  // it is very unreliable to find the installing project's package.json
+
+  const targetsToInstall = require('./package.json').targetsToInstall;
+
   attempts = attempts || 2;
   if (attempts > 5) {
     console.log("Can't resolve main package.json file");
     return {
-      targets: [],
+      targets: targetsToInstall,
       platforms: [process.platform],
       arches: [process.arch],
     };
@@ -22,7 +28,7 @@ function optionsFromPackage(attempts) {
       'utf-8'
     );
     const packageJson = JSON.parse(content);
-    const opts = packageJson.iohook || {};
+    const opts = packageJson.iohook || { targets: targetsToInstall };
     if (!opts.targets) {
       opts.targets = [];
     }

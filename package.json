@@ -96,6 +96,9 @@
       "119"
     ]
   ],
+  "targetsToInstall": [
+    "electron-119"
+  ],
   "directories": {
     "doc": "docs",
     "example": "examples",
