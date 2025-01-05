@@ -9,14 +9,15 @@ on:
 
 env:
   ELECTRON_VERSION: 33.2.1  # the specific Electron version
-  NODE_VERSION: 20.18.0 # The corresponding node version that electron uses
+  NODE_VERSION: 18.18.2 # The corresponding node version that electron uses
   
 jobs:
   ci:
     if: startsWith(github.ref, 'refs/tags/v')
     strategy:
       matrix:
-        os: [macos-13, windows-latest]
+        os: [windows-latest]
+        # os: [macos-13, windows-latest]
         arch: [x64, arm64]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} (${{matrix.arch}})
@@ -39,6 +40,7 @@ jobs:
 
       - name: Patch Nan
         run: npm run postinstall
+        shell: bash
 
       - name: Build & Publish Prebuilds
         run: npm run build:ci -- --msvs_version=2022
