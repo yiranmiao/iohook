@@ -25,7 +25,8 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:deploy": "npm run docs:build && gh-pages -d docs/.vuepress/dist/",
-    "release": "git add . && git commit -am 'version bump' && git tag v$(node -p \"require('./package.json').version\") && git push --tags"
+    "release": "git add . && git commit -am 'version bump' && git tag v$(node -p \"require('./package.json').version\") && git push --tags",
+    "postinstall": "sed 's/^#include .nan_scriptorigin\\.h./\\/\\/ #include nan_scriptorigin.h/' ./node_modules/nan/nan.h > ./node_modules/nan/nan.h.new && mv ./node_modules/nan/nan.h.new ./node_modules/nan/nan.h"
   },
   "keywords": [
     "hook",
@@ -80,7 +81,7 @@
     "jest": "^26.6.3",
     "lint-staged": "^11.0.0",
     "minimist": "^1.2.5",
-    "nan": "^2.15.0",
+    "nan": "^2.22.0",
     "node-abi": "^3.71.0",
     "node-gyp": "^9.4.0",
     "prebuild": "^11.0.4",
