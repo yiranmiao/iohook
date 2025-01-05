@@ -81,7 +81,7 @@
     "lint-staged": "^11.0.0",
     "minimist": "^1.2.5",
     "nan": "^2.15.0",
-    "node-abi": "^3.54.0",
+    "node-abi": "^3.71.0",
     "node-gyp": "^9.4.0",
     "prebuild": "^11.0.4",
     "prettier": "^2.3.1",
@@ -92,12 +92,12 @@
   "supportedTargets": [
     [
       "electron",
-      "28.1.3",
-      "119"
+      "33.2.1",
+      "130"
     ]
   ],
   "targetsToInstall": [
-    "electron-119"
+    "electron-130"
   ],
   "directories": {
     "doc": "docs",
