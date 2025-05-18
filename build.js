@@ -1,4 +1,5 @@
 const spawn = require('child_process').spawn;
+const execSync = require('child_process').execSync;
 const fs = require('fs-extra');
 const path = require('path');
 const tar = require('tar');
@@ -149,7 +150,6 @@ function build(runtime, version, abi) {
       args.push('--dist-url=https://artifacts.electronjs.org/headers/dist');
     }
 
-    // console.log("\n\n============= arch:\n\n" + arch + "\n\n====================\n\n");
     if (parseInt(abi) >= 80) {
       if (arch === 'x64' || arch === 'arm64') {
         args.push('--v8_enable_pointer_compression=1');
@@ -168,10 +168,11 @@ function build(runtime, version, abi) {
     }
 
     console.log('Building iohook for ' + runtime + ' v' + version + '>>>>');
+
     if (process.platform === 'win32') {
       if (version.split('.')[0] >= 4) {
         process.env.msvs_toolset = 15;
-        process.env.msvs_version = argv.msvs_version || 2017;
+        process.env.msvs_version = argv.msvs_version || 2022;
       } else {
         process.env.msvs_toolset = 12;
         process.env.msvs_version = 2013;
@@ -184,17 +185,55 @@ function build(runtime, version, abi) {
       process.env.gyp_iohook_arch = arch;
     }
 
-    let proc = spawn(gypJsPath, args, {
-      env: process.env,
-    });
-    proc.stdout.pipe(process.stdout);
-    proc.stderr.pipe(process.stderr);
-    proc.on('exit', function (code, sig) {
-      if (code === 1) {
-        return reject(new Error('Failed to build...'));
+    try {
+      // Check if node-gyp exists and is executable
+      console.log('Using node-gyp at:', gypJsPath);
+
+      if (process.platform === 'win32' && arch === 'arm64') {
+        /*
+         * WINDOWS ARM64 WORKAROUND
+         * 
+         * Problem: On Windows ARM64, the spawn() function throws "spawn EINVAL" error
+         * when trying to execute node-gyp.cmd with specific arguments.
+         * 
+         * Root cause: There appears to be an issue with how spawn() handles command paths
+         * and arguments specifically on Windows ARM64 architecture.
+         * 
+         * Solution: Use execSync() instead of spawn() for ARM64 Windows builds.
+         * This bypasses the spawn() limitations and runs the command directly.
+         */
+        console.log('Using execSync for Windows ARM64 build (workaround for spawn EINVAL error)');
+
+        // Simply use 'node-gyp' instead of the full path to node-gyp.cmd
+        // This avoids path-related issues that can cause EINVAL errors
+        const cmdString = 'node-gyp ' + args.join(' ');
+        console.log('Running command:', cmdString);
+
+        try {
+          execSync(cmdString, { stdio: 'inherit', env: process.env });
+          resolve();
+        } catch (err) {
+          console.error('Build error:', err);
+          reject(new Error('Failed to build...'));
+        }
+      } else {
+        // For non-ARM64 Windows and other platforms, use the original spawn approach
+        let proc = spawn(gypJsPath, args, {
+          env: process.env,
+        });
+        proc.stdout.pipe(process.stdout);
+        proc.stderr.pipe(process.stderr);
+        proc.on('exit', function (code, sig) {
+          if (code === 1) {
+            return reject(new Error('Failed to build...'));
+          }
+          resolve();
+        });
       }
-      resolve();
-    });
+    } catch (err) {
+      console.error('Error:', err);
+      reject(err);
+    }
   });
 }
 
