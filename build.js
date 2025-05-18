@@ -186,49 +186,23 @@ function build(runtime, version, abi) {
     }
 
     try {
-      // Check if node-gyp exists and is executable
       console.log('Using node-gyp at:', gypJsPath);
 
-      if (process.platform === 'win32' && arch === 'arm64') {
-        /*
-         * WINDOWS ARM64 WORKAROUND
-         * 
-         * Problem: On Windows ARM64, the spawn() function throws "spawn EINVAL" error
-         * when trying to execute node-gyp.cmd with specific arguments.
-         * 
-         * Root cause: There appears to be an issue with how spawn() handles command paths
-         * and arguments specifically on Windows ARM64 architecture.
-         * 
-         * Solution: Use execSync() instead of spawn() for ARM64 Windows builds.
-         * This bypasses the spawn() limitations and runs the command directly.
-         */
-        console.log('Using execSync for Windows ARM64 build (workaround for spawn EINVAL error)');
+      // Use execSync for all platforms and architectures
+      console.log('Using execSync for build');
 
-        // Simply use 'node-gyp' instead of the full path to node-gyp.cmd
-        // This avoids path-related issues that can cause EINVAL errors
-        const cmdString = 'node-gyp ' + args.join(' ');
-        console.log('Running command:', cmdString);
+      // For Windows, we'll use node-gyp directly to avoid path issues
+      // For other platforms, we'll use the full path to node-gyp
+      const cmdPath = process.platform === 'win32' ? 'node-gyp' : gypJsPath;
+      const cmdString = cmdPath + ' ' + args.join(' ');
+      console.log('Running command:', cmdString);
 
-        try {
-          execSync(cmdString, { stdio: 'inherit', env: process.env });
-          resolve();
-        } catch (err) {
-          console.error('Build error:', err);
-          reject(new Error('Failed to build...'));
-        }
-      } else {
-        // For non-ARM64 Windows and other platforms, use the original spawn approach
-        let proc = spawn(gypJsPath, args, {
-          env: process.env,
-        });
-        proc.stdout.pipe(process.stdout);
-        proc.stderr.pipe(process.stderr);
-        proc.on('exit', function (code, sig) {
-          if (code === 1) {
-            return reject(new Error('Failed to build...'));
-          }
-          resolve();
-        });
+      try {
+        execSync(cmdString, { stdio: 'inherit', env: process.env });
+        resolve();
+      } catch (err) {
+        console.error('Build error:', err);
+        reject(new Error('Failed to build...'));
       }
     } catch (err) {
       console.error('Error:', err);
