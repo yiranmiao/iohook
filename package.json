@@ -25,7 +25,7 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:deploy": "npm run docs:build && gh-pages -d docs/.vuepress/dist/",
-    "release": "git add . && git commit -am 'version bump' && git tag v$(node -p \"require('./package.json').version\") && git push --tags",
+    "release": "git add . && git commit -m \"version bump\" && git tag v$(node -p \"require('./package.json').version\") && git push --tags",
     "postinstall": "sed 's/^#include .nan_scriptorigin\\.h./\\/\\/ #include nan_scriptorigin.h/' ./node_modules/nan/nan.h > ./node_modules/nan/nan.h.new && mv ./node_modules/nan/nan.h.new ./node_modules/nan/nan.h"
   },
   "keywords": [
