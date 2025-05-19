@@ -25,7 +25,8 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:deploy": "npm run docs:build && gh-pages -d docs/.vuepress/dist/",
-    "release": "git add . && git commit -m \"version bump\" && node -e \"const v=require('./package.json').version; require('child_process').execSync('git tag v'+v+' && git push --tags')\""
+    "release": "git add . && git commit -m \"version bump\" && node -e \"const v=require('./package.json').version; require('child_process').execSync('git tag v'+v+' && git push --tags')\"",
+    "postinstall": "node postinstall.js"
   },
   "keywords": [
     "hook",

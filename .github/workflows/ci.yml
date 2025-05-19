@@ -8,16 +8,23 @@ on:
     branches: [master]
 
 env:
-  ELECTRON_VERSION: 33.2.1  # the specific Electron version
+  ELECTRON_VERSION: 33.2.1 # the specific Electron version
   NODE_VERSION: 20.18.0 # The corresponding node version that electron uses
-  
+
 jobs:
   ci:
     if: startsWith(github.ref, 'refs/tags/v')
     strategy:
       matrix:
-        os: [macos-13, windows-latest]
-        arch: [x64, arm64]
+        include:
+          - os: macos-13
+            arch: x64
+          - os: macos-13-xlarge
+            arch: arm64
+          - os: windows-latest
+            arch: x64
+          - os: windows-11-arm
+            arch: arm64
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} (${{matrix.arch}})
     steps:
